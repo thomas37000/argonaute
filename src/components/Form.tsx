@@ -6,10 +6,8 @@ import '../App.css';
 
 const Form: React.FC = () => {
   const [argos, setArgos] = useState<IArgo>({
-    equipage: {
-      nom: '',
-      age: 23,
-    },
+    nom: '',
+    age: 23,
   });
 
   const [skill, setSkills] = useState<ISoftSkills>({
@@ -21,24 +19,20 @@ const Form: React.FC = () => {
     },
   });
 
-  const handleChangeEquipage = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ): void => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setArgos({
-      equipage: {
-        ...argos.equipage,
-        [event.target.name]: event.target.value,
-      },
+      ...argos,
+      [event.target.name]: event.target.value,
     });
   };
 
-  const addNewequipage = (event: React.FormEvent<HTMLFormElement>): void => {
+  const addNew = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    if (argos.equipage.nom && argos.equipage.age) {
+    if (argos.nom && argos.age) {
       axios
         .post('http://localhost:8080', {
-          nom: argos.equipage.nom,
-          age: argos.equipage.age,
+          nom: argos.nom,
+          age: argos.age,
         })
         .then((res) => {
           console.log(res);
@@ -82,7 +76,7 @@ const Form: React.FC = () => {
     <main>
       <h2>Ajouter un(e) Argonaute</h2>
 
-      <form onSubmit={addNewequipage} className='new-member-form'>
+      <form onSubmit={addNew} className='new-member-form'>
         <label htmlFor='nom'>
           Nom de l'Argonaute :
           <input
@@ -90,8 +84,8 @@ const Form: React.FC = () => {
             type='text'
             name='nom'
             placeholder='Charalampos'
-            value={argos.equipage.nom}
-            onChange={handleChangeEquipage}
+            value={argos.nom}
+            onChange={handleChange}
             required
           />
         </label>
@@ -103,8 +97,8 @@ const Form: React.FC = () => {
             type='number'
             name='age'
             placeholder='23'
-            value={argos.equipage.age}
-            onChange={handleChangeEquipage}
+            value={argos.age}
+            onChange={handleChange}
           />
         </label>
 

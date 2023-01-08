@@ -1,6 +1,4 @@
 export default interface IArgo {
-  equipage: {
-    nom: string;
-    age: number;
-  };
+  nom: string;
+  age: number;
 }
