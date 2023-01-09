@@ -11,12 +11,9 @@ const Form: React.FC = () => {
   });
 
   const [skill, setSkills] = useState<ISoftSkills>({
-    softSkills: {
-      IdSoftSkills: 1,
-      skill: '',
-      skill_2: '',
-      skill_3: '',
-    },
+    skill: '',
+    skill_2: '',
+    skill_3: '',
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -45,25 +42,19 @@ const Form: React.FC = () => {
     event: React.ChangeEvent<HTMLInputElement>
   ): void => {
     setSkills({
-      softSkills: {
-        ...skill.softSkills,
-        [event.target.name]: event.target.value,
-      },
+      ...skill,
+      [event.target.name]: event.target.value,
     });
   };
 
   const addNewSoftSkills = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    if (
-      skill.softSkills.skill &&
-      skill.softSkills.skill_2 &&
-      skill.softSkills.skill_3
-    ) {
+    if (skill.skill && skill.skill_2 && skill.skill_3) {
       axios
         .post('http://localhost:8080/skills', {
-          skill: skill.softSkills.skill,
-          skill_2: skill.softSkills.skill_2,
-          skill_3: skill.softSkills.skill_3,
+          skill: skill.skill,
+          skill_2: skill.skill_2,
+          skill_3: skill.skill_3,
         })
         .then((res) => {
           console.log(res);
@@ -113,7 +104,7 @@ const Form: React.FC = () => {
             type='text'
             name='skill'
             placeholder='fort(e)'
-            value={skill.softSkills.skill}
+            value={skill.skill}
             onChange={handleChangeSoftSkills}
             required
           />
@@ -126,7 +117,7 @@ const Form: React.FC = () => {
             type='text'
             name='skill_2'
             placeholder='courageux(se)'
-            value={skill.softSkills.skill_2 as string}
+            value={skill.skill_2 as string}
             onChange={handleChangeSoftSkills}
           />
         </label>
@@ -138,7 +129,7 @@ const Form: React.FC = () => {
             type='text'
             name='skill_3'
             placeholder='malin(e)'
-            value={skill.softSkills.skill_3 as string}
+            value={skill.skill_3 as string}
             onChange={handleChangeSoftSkills}
           />
         </label>

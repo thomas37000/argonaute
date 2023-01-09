@@ -1,15 +1,15 @@
-const express = require("express");
-const connection = require("../../config/config");
+const express = require('express');
+const connection = require('../../config/config');
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
+router.get('/', (req, res) => {
   connection.query(
-    "SELECT * from equipage ORDER BY nom ASC",
-    (err, results) => {
-      if (err) {
-        console.log(err);
-        res.status(500).json(err);
+    'SELECT * from equipage ORDER BY nom ASC',
+    (error, results) => {
+      if (error) {
+        console.log(error);
+        res.status(500).json(error);
       } else if (results.length < 1) {
         res.status(404).send("il n 'y a pas d' équipages ici !");
       } else {
@@ -19,26 +19,26 @@ router.get("/", (req, res) => {
   );
 });
 
-router.get("/skills", (req, res) => {
+router.get('/argonaute/:id', (req, res) => {
   connection.query(
-    "SELECT * from softSkills",
-    (err, results) => {
-      if (err) {
-        console.log(err);
-        res.status(500).json(err);
+    'SELECT * FROM equipage WHERE idEquipage = ?',
+    [req.params.id],
+    (error, results) => {
+      if (error) {
+        res.status(500).json(error);
       } else if (results.length < 1) {
-        res.status(404).send("ces softSkills n'existent pas !");
+        res.status(404).send('Argonaute inconnu(e)!');
       } else {
-        res.status(200).json(results);
+        res.status(200).json(results[0]);
       }
     }
   );
 });
 
-router.post("/", (req, res) => {
+router.post('/', (req, res) => {
   const { nom, age } = req.body;
   connection.query(
-    "INSERT INTO equipage (nom, age) VALUES (?, ?)",
+    'INSERT INTO equipage (nom, age) VALUES (?, ?)',
     [nom, age],
     (error, result) => {
       if (error) {
@@ -53,24 +53,37 @@ router.post("/", (req, res) => {
   );
 });
 
-router.post("/skills", (req, res) => {
-  const { skill, skill_2, skill_3 } = req.body;
+router.put('/:id', (req, res) => {
+  const idArgonaute = req.params.id;
+  const newArgonaute = req.body;
   connection.query(
-    "INSERT INTO softSkills (skill, skill_2, skill_3) VALUES (?, ?, ?)",
-    [skill, skill_2, skill_3],
-    (error, result) => {
+    `UPDATE equipage SET ? WHERE idEquipage = ?`,
+    [newArgonaute, idArgonaute],
+    (error) => {
       if (error) {
-        res.status(500).json({ error: error });
+        res.status(500).json({ errorMessage: error.message });
       } else {
-        res.status(201).json({
-          id: result.insertId,
-          ...req.body,
-        });
+        res.status(200).json({ ...req.body });
       }
     }
   );
 });
 
-
+router.delete('/:id', (req, res) => {
+  const idArgonaute = req.params.id;
+  connection.query(
+    'DELETE FROM equipage WHERE idEquipage = ?',
+    [idArgonaute],
+    (error) => {
+      if (error) {
+        res.status(500).send("la suppression n' a pas marché !");
+      } else {
+        res
+          .status(200)
+          .send("l'argonaute a bien était supprimé et envoyé aux requins !");
+      }
+    }
+  );
+});
 
 module.exports = router;
