@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import IArgo from './interface/IArgo';
 import ISoftSkills from './interface/ISoftSkills';
-import Card from './components/Card';
+import CardEquipage from './components/Card';
 import CardSkills from './components/CardSkills';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 const Home: React.FC = () => {
   const [argos, setArgos] = useState<IArgo[]>([]);
@@ -30,7 +33,7 @@ const Home: React.FC = () => {
   const fetchEquipage =
     argos &&
     argos.map((argo, i) => {
-      return <Card key={i} argo={argo} />;
+      return <CardEquipage key={i} argo={argo} />;
     });
 
   useEffect(() => {
@@ -61,8 +64,13 @@ const Home: React.FC = () => {
 
   return (
     <>
-      <div className='flex flex-wrap space-x-4 space-y-4'>{fetchEquipage}</div>
-      <div className='flex flex-wrap space-x-4 space-y-4'>
+      <div
+        className='gridEquipage d-flex flex-wrap justify-content-around
+      '
+      >
+        {fetchEquipage}
+      </div>
+      <div className='gridEquipage d-flex flex-wrap justify-content-around'>
         {fetchSoftSkills}
       </div>
     </>

@@ -53,6 +53,42 @@ router.post('/', (req, res) => {
   );
 });
 
+
+/********************** Ne marche pas pour l'instant **************************/
+
+router.get('/argonaute/:id/skills', (req, res) => {
+  connection.query(
+    `SELECT * FROM softSkills 
+      JOIN equipage_softSkills e 
+      ON equipage_idEquipage = e.equipage_idEquipage 
+      WHERE e.softSkills_idSoftSkills = ?`,
+    req.params.id,
+    (error, results) => {
+      if (error) {
+        res.status(500).json({ error: error });
+      } else {
+        res.status(200).json(results);
+      }
+    }
+  );
+});
+
+/***********************************************/
+
+router.post('/argonaute/:id/skills/:idSoftSkills', (req, res) => {
+  connection.query(
+    'INSERT INTO equipage_softSkills (equipage_idEquipage, softSkills_idSoftSkills) VALUES (?, ?)',
+    [req.params.id, req.params.idSoftSkills],
+    (error) => {
+      if (error) {
+        res.status(500).json({ error: error });
+      } else {
+        res.sendStatus(201);
+      }
+    }
+  );
+});
+
 router.put('/:id', (req, res) => {
   const idArgonaute = req.params.id;
   const newArgonaute = req.body;
@@ -63,7 +99,9 @@ router.put('/:id', (req, res) => {
       if (error) {
         res.status(500).json({ errorMessage: error.message });
       } else {
-        res.status(200).json({ ...req.body });
+        res
+          .status(201)
+          .send("l'argonaute a bien était supprimé et envoyé aux requins !");
       }
     }
   );

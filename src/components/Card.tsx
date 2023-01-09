@@ -1,14 +1,16 @@
 import IArgo from '../interface/IArgo';
+import Card from 'react-bootstrap/Card';
 
-const Card = (props: { argo: IArgo }) => {
+const CardEquipage = (props: { argo: IArgo }) => {
   const { argo } = props;
 
   return (
-    <div className='divCard'>
-      <h3 className='cardName'>
-        {argo.nom} - {argo.age} ans
-      </h3>
-    </div>
+    <Card style={{ width: '18rem', marginBottom: '1rem' }}>
+      <Card.Body>
+        <Card.Title> {argo.nom}</Card.Title>
+        <Card.Text>{argo.age} ans</Card.Text>
+      </Card.Body>
+    </Card>
   );
 };
-export default Card;
+export default CardEquipage;

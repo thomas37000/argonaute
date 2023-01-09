@@ -1,6 +1,7 @@
 import './App.css';
-import Form from './components/Form';
+import ArgoForm from './components/Form';
 import Home from './Home';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
           Les Argonautes
         </h1>
       </header>
-      <Form />
+      <ArgoForm />
       <Home />
     </div>
   );
