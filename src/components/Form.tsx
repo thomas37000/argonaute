@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button';
 
 const ArgoForm: React.FC = () => {
   const [argos, setArgos] = useState<IArgo>({
+    idEquipage: 1,
     nom: '',
     age: 23,
   });

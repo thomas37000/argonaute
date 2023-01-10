@@ -4,6 +4,7 @@ import IArgo from './interface/IArgo';
 import ISoftSkills from './interface/ISoftSkills';
 import CardEquipage from './components/Card';
 import CardSkills from './components/CardSkills';
+import ArgoForm from './components/Form';
 
 const Home: React.FC = () => {
   const [argos, setArgos] = useState<IArgo[]>([]);
@@ -33,21 +34,21 @@ const Home: React.FC = () => {
       return <CardEquipage key={i} argo={argo} />;
     });
 
-  useEffect(() => {
-    const loadData = () => {
-      setLoading(true);
-      axios
-        .get('http://localhost:8080/skills')
-        .then((res) => {
-          setError('');
-          setSkills(res.data);
-        })
-        .catch((err) => setError(err.message))
-        .finally(() => setLoading(false));
-    };
+  // useEffect(() => {
+  //   const loadData = () => {
+  //     setLoading(true);
+  //     axios
+  //       .get('http://localhost:8080/skills')
+  //       .then((res) => {
+  //         setError('');
+  //         setSkills(res.data);
+  //       })
+  //       .catch((err) => setError(err.message))
+  //       .finally(() => setLoading(false));
+  //   };
 
-    loadData();
-  }, []);
+  //   loadData();
+  // }, []);
 
   const fetchSoftSkills =
     skills &&
@@ -60,21 +61,24 @@ const Home: React.FC = () => {
   if (!argos) return <p>"Problème avec l' Api..."</p>;
 
   return (
-    <div className='home'>
-      <p className='argos-length'>
-        Il y a {argos.length} argonautes dans l' équipage.
-      </p>
+    <>
+      <ArgoForm />
+      <div className='home'>
+        <p className='argos-length'>
+          Il y a {argos.length} argonautes dans l' équipage.
+        </p>
 
-      <div
-        className='gridEquipage d-flex flex-wrap justify-content-around
+        <div
+          className='gridEquipage d-flex flex-wrap justify-content-around
       '
-      >
-        {fetchEquipage}
+        >
+          {fetchEquipage}
+        </div>
+        {/* <div className='gridEquipage d-flex flex-wrap justify-content-around'>
+          {fetchSoftSkills}
+        </div> */}
       </div>
-      <div className='gridEquipage d-flex flex-wrap justify-content-around'>
-        {fetchSoftSkills}
-      </div>
-    </div>
+    </>
   );
 };
 

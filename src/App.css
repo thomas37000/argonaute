@@ -15,7 +15,8 @@
 
 main,
 .home,
-.gridEquipage {
+.gridEquipage,
+.cardById {
   max-width: 960px;
   margin: 0 auto;
 }
@@ -54,12 +55,17 @@ label {
 }
 
 .home {
-  background-color: #f4f4f4;
   margin-top: -1rem;
+  border-radius: 15px;
+  background-color: #f4f4f4;
 }
 
 .argos-length {
   padding-top: 1rem;
+}
+
+.cardById {
+  margin-top: 10rem;
 }
 
 @keyframes App-logo-spin {

@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
   );
 });
 
-router.get('/argonaute/:id', (req, res) => {
+router.get('/:id', (req, res) => {
   connection.query(
     'SELECT * FROM equipage WHERE idEquipage = ?',
     [req.params.id],
@@ -56,7 +56,7 @@ router.post('/', (req, res) => {
 
 /********************** Ne marche pas pour l'instant **************************/
 
-router.get('/argonaute/:id/skills', (req, res) => {
+router.get('/:id/skills', (req, res) => {
   connection.query(
     `SELECT * FROM softSkills 
       JOIN equipage_softSkills e 
@@ -75,19 +75,19 @@ router.get('/argonaute/:id/skills', (req, res) => {
 
 /***********************************************/
 
-router.post('/argonaute/:id/skills/:idSoftSkills', (req, res) => {
-  connection.query(
-    'INSERT INTO equipage_softSkills (equipage_idEquipage, softSkills_idSoftSkills) VALUES (?, ?)',
-    [req.params.id, req.params.idSoftSkills],
-    (error) => {
-      if (error) {
-        res.status(500).json({ error: error });
-      } else {
-        res.sendStatus(201);
-      }
-    }
-  );
-});
+// router.post('/:id/skills/:idSoftSkills', (req, res) => {
+//   connection.query(
+//     'INSERT INTO equipage_softSkills (equipage_idEquipage, softSkills_idSoftSkills) VALUES (?, ?)',
+//     [req.params.id, req.params.idSoftSkills],
+//     (error) => {
+//       if (error) {
+//         res.status(500).json({ error: error });
+//       } else {
+//         res.sendStatus(201);
+//       }
+//     }
+//   );
+// });
 
 router.put('/:id', (req, res) => {
   const idArgonaute = req.params.id;
