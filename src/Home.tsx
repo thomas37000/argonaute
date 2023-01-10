@@ -4,9 +4,6 @@ import IArgo from './interface/IArgo';
 import ISoftSkills from './interface/ISoftSkills';
 import CardEquipage from './components/Card';
 import CardSkills from './components/CardSkills';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 
 const Home: React.FC = () => {
   const [argos, setArgos] = useState<IArgo[]>([]);

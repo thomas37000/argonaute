@@ -4,10 +4,6 @@ import IArgo from '../interface/IArgo';
 import ISoftSkills from '../interface/ISoftSkills';
 import '../App.css';
 import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 
 const ArgoForm: React.FC = () => {
   const [argos, setArgos] = useState<IArgo>({
@@ -37,7 +33,9 @@ const ArgoForm: React.FC = () => {
           age: argos.age,
         })
         .then((res) => {
-          console.log(res);
+          alert(
+            "Argonautre bien ajouté, relancer la page pour voir l'argonaute dans la liste"
+          );
         })
         .catch((err) => console.log('error: ', err));
     }
@@ -62,7 +60,9 @@ const ArgoForm: React.FC = () => {
           skill_3: skill.skill_3,
         })
         .then((res) => {
-          console.log(res);
+          alert(
+            'Softkills ajoutés, relancer la page pour voir les voir dans la liste'
+          );
         })
         .catch((err) => console.log('error: ', err));
     }
