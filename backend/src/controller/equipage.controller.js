@@ -101,7 +101,7 @@ router.put('/:id', (req, res) => {
       } else {
         res
           .status(201)
-          .send("l'argonaute a bien était supprimé et envoyé aux requins !");
+          .send("l'argonaute a bien était modifié");
       }
     }
   );

@@ -11,3 +11,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+html::before {
+  content: "";
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-height: 100%;
+  width: 100%;
+  z-index: -1;
+  background-image: url("https://decouvrirlagrece.com/wp-content/uploads/2020/12/653.jpg");
+  background-size: cover;
+  opacity: 0.9;
+}

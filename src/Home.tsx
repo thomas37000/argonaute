@@ -60,7 +60,11 @@ const Home: React.FC = () => {
   if (!argos) return <p>"Problème avec l' Api..."</p>;
 
   return (
-    <>
+    <div className='home'>
+      <p className='argos-length'>
+        Il y a {argos.length} argonautes dans l' équipage.
+      </p>
+
       <div
         className='gridEquipage d-flex flex-wrap justify-content-around
       '
@@ -70,7 +74,7 @@ const Home: React.FC = () => {
       <div className='gridEquipage d-flex flex-wrap justify-content-around'>
         {fetchSoftSkills}
       </div>
-    </>
+    </div>
   );
 };
 
